@@ -16,27 +16,27 @@ module.exports = class ListView extends Backbone.Marionette.CompositeView
     'click @ui.toggle': 'onToggleAllClick'
 
   collectionEvents:
-    'all': 'updateToggleAllState'
+    'all': 'update'
 
   filteredOn: 'all'
 
   initialize: ->
-    App.core.vent.on 'change:filter', (filter) =>
-      @filteredOn = filter
-      @render()
+    App.core.vent.on 'change:filter', (filter) => @updateSelection filter
 
   addChild: (child) ->
-    if child.matchesFilter @filteredOn
-      Backbone.Marionette.CompositeView.prototype.addChild.apply @, arguments
+    super if child.matchesFilter @filteredOn
 
   onRender: ->
-    @updateToggleAllState()
+    @update()
+
+  updateSelection: (@filteredOn) ->
+    @render()
 
   onToggleAllClick: (event) ->
     isChecked = event.currentTarget.checked
     @collection.forEach (todo) -> todo.save { 'completed': isChecked }
 
-  updateToggleAllState: ->
+  update: ->
     reduceCompleted = (left, right) -> left and right.get 'completed'
     allCompleted = @collection.reduce reduceCompleted, true
     this.ui.toggle.prop 'checked', allCompleted
