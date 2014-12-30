@@ -8,9 +8,9 @@ Footer     = require './layout/footer'
 ListView   = require './view/list-view'
 TodoList   = require './collection/todo-list'
 
-App.prototype.start = ->
+App::start = ->
   App.core = new Backbone.Marionette.Application
-  
+
   App.data =
     todoList: new TodoList
 

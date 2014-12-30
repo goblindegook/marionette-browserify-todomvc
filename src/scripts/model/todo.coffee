@@ -15,5 +15,6 @@ module.exports = class Todo extends Backbone.Model
     @get 'completed'
 
   matchesFilter: (filter) ->
-    return true if filter == 'all'
-    if filter == 'active' then not @isCompleted() else @isCompleted()
+    return @isCompleted()     if filter is 'completed'
+    return not @isCompleted() if filter is 'active'
+    true

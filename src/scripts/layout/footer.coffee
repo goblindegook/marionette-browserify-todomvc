@@ -40,5 +40,4 @@ module.exports = class Footer extends Backbone.Marionette.LayoutView
     this.ui[filter]?.addClass 'selected'
 
   onClearClick: ->
-    completed = @collection.getCompleted()
-    completed.forEach (todo) -> todo.destroy()
+    App.core.vent.trigger 'clear:completed'

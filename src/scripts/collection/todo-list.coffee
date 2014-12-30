@@ -2,7 +2,7 @@ App  = require '../app'
 Todo = require '../model/todo'
 
 module.exports = class TodoList extends Backbone.Collection
-  
+
   model: Todo
 
   localStorage: new Backbone.LocalStorage 'marionette-todomvc'
@@ -19,4 +19,4 @@ module.exports = class TodoList extends Backbone.Collection
     @where { completed: false }
 
   clearCompleted: ->
-    @getCompleted().each (todo) -> todo.destroy()
+    todo.destroy() for todo in @getCompleted()
