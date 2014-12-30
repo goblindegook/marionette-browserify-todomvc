@@ -10,9 +10,9 @@ TodoList   = require './collection/todo-list'
 
 App.prototype.start = ->
   App.core = new Backbone.Marionette.Application
-  App.data = {}
-
-  App.data.todoList = new TodoList
+  
+  App.data =
+    todoList: new TodoList
 
   App.core.addRegions
     header: '#header'

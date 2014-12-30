@@ -5,8 +5,6 @@ module.exports = class Todo extends Backbone.Model
     completed: false
     created:   0
 
-  localStorage: new Backbone.LocalStorage 'marionette-todomvc'
-
   initialize: ->
     if @isNew() then @set 'created', Date.now()
 

@@ -62,4 +62,4 @@ module.exports = class ItemView extends Backbone.Marionette.ItemView
     if @todoText
       @model.set('title', @todoText).save()
     else
-      @destroy()
+      @model.destroy()
