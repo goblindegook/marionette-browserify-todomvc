@@ -1,5 +1,5 @@
 # Make the App class available right away:
-module.exports = window.App = class App
+module.exports = class App
 
 Router     = require './router'
 Controller = require './controller'

@@ -1,3 +1,4 @@
+App      = require '../app'
 ItemView = require './item-view'
 
 module.exports = class ListView extends Backbone.Marionette.CompositeView
