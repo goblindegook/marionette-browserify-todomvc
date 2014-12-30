@@ -1,6 +1,6 @@
 {
   "name": "marionette-browserify-todomvc",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "A TodoMVC sampler application using CoffeeScript, Backbone.Marionette and Browserify",
   "repository": {
     "type": "git",
@@ -16,7 +16,6 @@
       "browserify-dustjs",
       "browserify-shim",
       "coffeeify",
-      "deamdify",
       "hbsfy"
     ]
   },
@@ -25,8 +24,7 @@
       "underscore": "lodash"
     }
   },
-  "browserify-shim": {
-  },
+  "browserify-shim": {},
   "devDependencies": {
     "aliasify": "^1.5.1",
     "browser-sync": "~1.3.6",
@@ -61,6 +59,7 @@
     "remapify": "^1.3.0",
     "require-dir": "^0.1.0",
     "sinon": "^1.12.2",
+    "uglifyify": "^2.6.0",
     "vinyl-source-stream": "~0.1.1",
     "watchify": "~1.0.2"
   },

@@ -18,7 +18,7 @@ module.exports =
     src: src + '/sass/*.{sass,scss}'
     dest: dest
     settings:
-      sourceComments: 'map'
+      sourceComments: do -> 'map' if debug
       imagePath: '/images'
 
   less:

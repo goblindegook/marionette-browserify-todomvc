@@ -1,5 +1,3 @@
-require './infrastructure'
-
 # Make the App class available right away:
 module.exports = window.App = class App
 

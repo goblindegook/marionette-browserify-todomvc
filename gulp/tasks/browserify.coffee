@@ -31,6 +31,11 @@ gulp.task 'browserify', (callback) ->
 
     bundle = () ->
       bundleLogger.start bundleConfig.outputName
+
+      # uglify code
+      unless config.browserify.debug
+        bundler.transform { global: true }, 'uglifyify'
+
       bundler.bundle()
         .on 'error', handleErrors
         .pipe source bundleConfig.outputName
@@ -46,10 +51,9 @@ gulp.task 'browserify', (callback) ->
 
       if bundleQueue > 0
         bundleQueue--
-        if bundleQueue == 0
-          # If queue is empty, tell gulp the task is complete.
-          # https://github.com/gulpjs/gulp/blob/master/docs/API.md#accept-a-callback
-          callback()
+        # If queue is empty, tell gulp the task is complete.
+        # https://github.com/gulpjs/gulp/blob/master/docs/API.md#accept-a-callback
+        callback() if bundleQueue == 0
 
     bundle()
 
