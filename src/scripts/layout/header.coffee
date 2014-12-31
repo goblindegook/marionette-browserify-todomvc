@@ -3,15 +3,15 @@ module.exports = class Header extends Backbone.Marionette.LayoutView
   template: require '../template/header'
 
   ui:
-    input: '#new-todo'
+    newTodo: '#new-todo'
 
   events:
-    'keypress @ui.input': 'onInputKeypress'
+    'keypress @ui.newTodo': 'onNewTodoKeypress'
 
-  onInputKeypress: (event) ->
+  onNewTodoKeypress: (key) ->
     ENTER_KEY = 13
-    todoText  = this.ui.input.val().trim()
+    todoText  = @.ui.newTodo.val().trim()
 
-    if event.which == ENTER_KEY && todoText
+    if key.which is ENTER_KEY and todoText
       @collection.create { title: todoText }
-      this.ui.input.val ''
+      @.ui.newTodo.val ''

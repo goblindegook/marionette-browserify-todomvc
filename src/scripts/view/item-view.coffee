@@ -15,9 +15,9 @@ module.exports = class ItemView extends Backbone.Marionette.ItemView
   events:
     'click @ui.toggle':   'onToggleTodo'
     'click @ui.destroy':  'onDeleteTodo'
-    'dblclick @ui.label': 'onEditStart'
-    'keydown @ui.edit':   'onEditKeypress'
-    'blur @ui.edit':      'onEditStop'
+    'dblclick @ui.label': 'onEditTodoStart'
+    'keydown @ui.edit':   'onEditTodoKeydown'
+    'blur @ui.edit':      'onEditTodoStop'
 
   modelEvents:
     'change': 'render'
@@ -35,24 +35,24 @@ module.exports = class ItemView extends Backbone.Marionette.ItemView
   toggleEditingMode: ->
     @$el.toggleClass 'editing'
 
-  onEditStart: ->
+  onEditTodoStart: ->
     @toggleEditingMode()
-    this.ui.edit.focus().val this.ui.label.text()
+    @.ui.edit.focus().val @.ui.label.text()
 
-  onEditKeypress: (event) ->
+  onEditTodoKeydown: (key) ->
     ENTER_KEY  = 13
     ESCAPE_KEY = 27
 
-    if event.which is ENTER_KEY
-      this.ui.edit.trigger 'blur'
+    if key.which is ENTER_KEY
+      @.ui.edit.trigger 'blur'
 
-    if event.which is ESCAPE_KEY
-      this.ui.edit.val @model.get 'title'
-      this.ui.edit.trigger 'blur'
+    if key.which is ESCAPE_KEY
+      @.ui.edit.val @model.get 'title'
+      @.ui.edit.trigger 'blur'
 
-  onEditStop: (event) ->
+  onEditTodoStop: ->
     @toggleEditingMode()
-    todoText = event.target.value.trim()
+    todoText = @.ui.edit.val().trim()
 
     if todoText
       @model.set('title', todoText).save()

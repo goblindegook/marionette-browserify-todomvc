@@ -36,8 +36,8 @@ module.exports = class Footer extends Backbone.Marionette.LayoutView
     @updateFilterSelection()
 
   updateFilterSelection: (filter) ->
-    this.ui.filters.removeClass 'selected'
-    this.ui[filter]?.addClass 'selected'
+    @.ui.filters.removeClass 'selected'
+    @.ui[filter]?.addClass 'selected'
 
   onClearClick: ->
     App.core.vent.trigger 'clear:completed'

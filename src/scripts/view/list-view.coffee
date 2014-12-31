@@ -32,14 +32,14 @@ module.exports = class ListView extends Backbone.Marionette.CompositeView
   updateSelection: (@filteredOn) ->
     @render()
 
-  onToggleAllClick: (event) ->
-    isChecked = event.currentTarget.checked
+  onToggleAllClick: (click) ->
+    isChecked = click.currentTarget.checked
     @collection.forEach (todo) -> todo.save { 'completed': isChecked }
 
   update: ->
     # Update toggler state
-    reduceCompleted = (left, right) -> left and right.get 'completed'
+    reduceCompleted = (completed, model) -> completed and model.get 'completed'
     allCompleted = @collection.reduce reduceCompleted, true
-    this.ui.toggle.prop 'checked', allCompleted
+    @.ui.toggle.prop 'checked', allCompleted
     # View visibility
     @$el.parent().toggle @collection.length > 0
