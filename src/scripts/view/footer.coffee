@@ -1,6 +1,6 @@
 App = require '../app'
 
-module.exports = class Footer extends Backbone.Marionette.LayoutView
+module.exports = class Footer extends Backbone.Marionette.ItemView
 
   template: require '../template/footer'
 
@@ -26,7 +26,7 @@ module.exports = class Footer extends Backbone.Marionette.LayoutView
     total  = @collection.length
     data   = {
       activeCount:      active
-      activeCountLabel: if active == 1 then 'item left' else 'items left'
+      activeCountLabel: if active is 1 then 'item left' else 'items left'
       totalCount:       total
       completedCount:   total - active
     }
@@ -40,4 +40,4 @@ module.exports = class Footer extends Backbone.Marionette.LayoutView
     @.ui[filter]?.addClass 'selected'
 
   onClearClick: ->
-    App.core.vent.trigger 'clear:completed'
+    @collection.clearCompleted()

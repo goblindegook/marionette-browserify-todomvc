@@ -3,12 +3,11 @@ Marionette = require('backbone.marionette');
 /**
  * Allows DustJS templates to be rendered on the default
  * Marionette flow.
- * 
+ *
  * @param  {Function} template Precompiled Dustjs template.
  * @param  {Object}   data     View data.
  * @return {String}            Rendered template.
  */
-
 Marionette.Renderer.render = function (template, data) {
     var html;
 

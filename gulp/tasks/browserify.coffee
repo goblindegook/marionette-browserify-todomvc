@@ -1,11 +1,12 @@
-### browserify task
-   ---------------
-   Bundle javascripty things with browserify!
+###
+browserify task
+---------------
+Bundle javascripty things with browserify!
 
-   This task is set up to generate multiple separate bundles, from
-   different sources, and to use Watchify when run from the default task.
+This task is set up to generate multiple separate bundles, from
+different sources, and to use Watchify when run from the default task.
 
-   See browserify.bundleConfigs in gulp/config.js
+See browserify.bundleConfigs in gulp/config.js
 ###
 
 gulp         = require 'gulp'

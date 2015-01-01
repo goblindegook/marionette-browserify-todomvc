@@ -1,4 +1,3 @@
-App  = require '../app'
 Todo = require '../model/todo'
 
 module.exports = class TodoList extends Backbone.Collection
@@ -9,9 +8,6 @@ module.exports = class TodoList extends Backbone.Collection
 
   comparator: 'created'
 
-  initialize: ->
-    App.core.vent.on 'clear:completed', => @clearCompleted()
-
   getCompleted: ->
     @where { completed: true }
 
@@ -20,3 +16,7 @@ module.exports = class TodoList extends Backbone.Collection
 
   clearCompleted: ->
     todo.destroy() for todo in @getCompleted()
+
+  isCompleted: ->
+    reduceCompleted = (completed, model) -> completed and model.get 'completed'
+    @reduce reduceCompleted, true

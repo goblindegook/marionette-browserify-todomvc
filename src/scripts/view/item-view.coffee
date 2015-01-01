@@ -1,5 +1,3 @@
-App = require '../app'
-
 module.exports = class ItemView extends Backbone.Marionette.ItemView
 
   tagName: 'li'
@@ -16,7 +14,7 @@ module.exports = class ItemView extends Backbone.Marionette.ItemView
     'click @ui.toggle':   'onToggleTodo'
     'click @ui.destroy':  'onDeleteTodo'
     'dblclick @ui.label': 'onEditTodoStart'
-    'keydown @ui.edit':   'onEditTodoKeydown'
+    'keydown @ui.edit':   'onEditTodoKeypress'
     'blur @ui.edit':      'onEditTodoStop'
 
   modelEvents:
@@ -39,22 +37,21 @@ module.exports = class ItemView extends Backbone.Marionette.ItemView
     @toggleEditingMode()
     @.ui.edit.focus().val @.ui.label.text()
 
-  onEditTodoKeydown: (key) ->
+  onEditTodoKeypress: (key) ->
     ENTER_KEY  = 13
     ESCAPE_KEY = 27
 
-    if key.which is ENTER_KEY
-      @.ui.edit.trigger 'blur'
-
     if key.which is ESCAPE_KEY
       @.ui.edit.val @model.get 'title'
+
+    if key.which in [ENTER_KEY, ESCAPE_KEY]
       @.ui.edit.trigger 'blur'
 
   onEditTodoStop: ->
     @toggleEditingMode()
-    todoText = @.ui.edit.val().trim()
+    title = @.ui.edit.val().trim()
 
-    if todoText
-      @model.set('title', todoText).save()
+    if title
+      @model.set('title', title).save()
     else
       @model.destroy()

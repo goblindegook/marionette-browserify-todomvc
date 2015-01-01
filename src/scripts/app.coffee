@@ -3,16 +3,14 @@ module.exports = class App
 
 Router     = require './router'
 Controller = require './controller'
-Header     = require './layout/header'
-Footer     = require './layout/footer'
+Header     = require './view/header'
+Footer     = require './view/footer'
 ListView   = require './view/list-view'
 TodoList   = require './collection/todo-list'
 
 App::start = ->
-  App.core = new Backbone.Marionette.Application
-
-  App.data =
-    todoList: new TodoList
+  App.core   = new Backbone.Marionette.Application
+  collection = new TodoList
 
   App.core.addRegions
     header: '#header'
@@ -20,14 +18,14 @@ App::start = ->
     footer: '#footer'
 
   App.core.addInitializer ->
-    App.core.header.show new Header { collection: App.data.todoList }
-    App.core.footer.show new Footer { collection: App.data.todoList }
-    App.core.main.show new ListView { collection: App.data.todoList }
-    App.data.todoList.fetch()
+    App.core.header.show new Header { collection }
+    App.core.footer.show new Footer { collection }
+    App.core.main.show new ListView { collection }
+    collection.fetch()
 
   App.core.on 'start', ->
-    App.controller = new Controller
-    App.router     = new Router { controller: App.controller }
+    controller = new Controller
+    router     = new Router { controller }
     Backbone.history.start()
 
   App.core.start()
