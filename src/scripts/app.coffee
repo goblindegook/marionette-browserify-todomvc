@@ -5,7 +5,6 @@ Footer     = require './view/footer'
 ListView   = require './view/list-view'
 TodoList   = require './collection/todo-list'
 
-# Make the App class available right away:
 module.exports = class TodoMVC extends Backbone.Marionette.Application
 
   regions:
