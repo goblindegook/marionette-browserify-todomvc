@@ -1,4 +1,3 @@
-App      = require '../app'
 ItemView = require './item-view'
 
 module.exports = class ListView extends Backbone.Marionette.CompositeView
@@ -20,8 +19,9 @@ module.exports = class ListView extends Backbone.Marionette.CompositeView
 
   filteredOn: 'all'
 
-  initialize: ->
-    App.core.vent.on 'change:filter', (filter) => @updateSelection filter
+  initialize: (options) ->
+    @app = options.app
+    @app.vent.on 'change:filter', (filter) => @updateSelection filter
 
   addChild: (child) ->
     super if child.matchesFilter @filteredOn

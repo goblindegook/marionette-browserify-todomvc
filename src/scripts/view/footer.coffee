@@ -1,5 +1,3 @@
-App = require '../app'
-
 module.exports = class Footer extends Backbone.Marionette.ItemView
 
   template: require '../template/footer'
@@ -18,8 +16,9 @@ module.exports = class Footer extends Backbone.Marionette.ItemView
   collectionEvents:
     'all': 'render'
 
-  initialize: ->
-    App.core.vent.on 'change:filter', (filter) => @updateFilterSelection filter
+  initialize: (options) ->
+    @app = options.app
+    @app.vent.on 'change:filter', (filter) => @updateFilterSelection filter
 
   serializeData: ->
     active = @collection.getActive().length

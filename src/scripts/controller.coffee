@@ -1,6 +1,7 @@
-App  = require './app'
-
 module.exports = class Controller extends Backbone.Marionette.Controller
 
+  initialize: (options) ->
+    @app = options.app
+
   filterTodo: (filter = 'all') ->
-    App.core.vent.trigger 'change:filter', filter.trim()
+    @app.vent.trigger 'change:filter', filter.trim()
