@@ -9,15 +9,14 @@ different sources, and to use Watchify when run from the default task.
 See browserify.bundleConfigs in gulp/config.js
 ###
 
-gulp            = require 'gulp'
-browserify      = require 'browserify'
-source          = require 'vinyl-source-stream'
-watchify        = require 'watchify'
-resolve         = require 'resolve'
-config          = require '../config'
-bundleLogger    = require '../util/bundleLogger'
-handleErrors    = require '../util/handleErrors'
-packageManifest = require '../../package.json'
+gulp         = require 'gulp'
+browserify   = require 'browserify'
+source       = require 'vinyl-source-stream'
+watchify     = require 'watchify'
+config       = require '../config'
+bundleLogger = require '../util/bundleLogger'
+handleErrors = require '../util/handleErrors'
+dependencies = (require '../../package.json').dependencies
 
 gulp.task 'browserify', (callback) ->
 
@@ -34,13 +33,11 @@ gulp.task 'browserify', (callback) ->
 
     # include vendor packages
     if bundleConfig.vendor is true
-      for dep, version of packageManifest.dependencies
-        bundler.require resolve.sync(dep), { expose: dep }
+      bundler.require dep for dep of dependencies
 
     # expose vendor packages without including them
     if bundleConfig.vendor is false
-      for dep, version of packageManifest.dependencies
-        bundler.external dep
+      bundler.external dep for dep of dependencies
 
     bundle = ->
       bundleLogger.start bundleConfig.outputName
