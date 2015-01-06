@@ -9,13 +9,15 @@ different sources, and to use Watchify when run from the default task.
 See browserify.bundleConfigs in gulp/config.js
 ###
 
-gulp         = require 'gulp'
-browserify   = require 'browserify'
-source       = require 'vinyl-source-stream'
-watchify     = require 'watchify'
-config       = require '../config'
-bundleLogger = require '../util/bundleLogger'
-handleErrors = require '../util/handleErrors'
+gulp            = require 'gulp'
+browserify      = require 'browserify'
+source          = require 'vinyl-source-stream'
+watchify        = require 'watchify'
+resolve         = require 'resolve'
+config          = require '../config'
+bundleLogger    = require '../util/bundleLogger'
+handleErrors    = require '../util/handleErrors'
+packageManifest = require '../../package.json'
 
 gulp.task 'browserify', (callback) ->
 
@@ -30,7 +32,17 @@ gulp.task 'browserify', (callback) ->
       extensions: config.browserify.extensions
       debug: config.browserify.debug
 
-    bundle = () ->
+    # include vendor packages
+    if bundleConfig.vendor is true
+      for dep, version of packageManifest.dependencies
+        bundler.require resolve.sync(dep), { expose: dep }
+
+    # expose vendor packages without including them
+    if bundleConfig.vendor is false
+      for dep, version of packageManifest.dependencies
+        bundler.external dep
+
+    bundle = ->
       bundleLogger.start bundleConfig.outputName
 
       # uglify code
@@ -54,7 +66,7 @@ gulp.task 'browserify', (callback) ->
         bundleQueue--
         # If queue is empty, tell gulp the task is complete.
         # https://github.com/gulpjs/gulp/blob/master/docs/API.md#accept-a-callback
-        callback() if bundleQueue == 0
+        callback() if bundleQueue is 0
 
     bundle()
 

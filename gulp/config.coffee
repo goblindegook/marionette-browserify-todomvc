@@ -53,8 +53,9 @@ module.exports =
       entries: src + '/scripts/main.coffee'
       dest: dest
       outputName: 'main.js'
+      vendor: false
     ,
-      entries: src + '/scripts/infrastructure.coffee'
       dest: dest
       outputName: 'infrastructure.js'
+      vendor: true
     ]
