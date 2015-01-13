@@ -1,6 +1,6 @@
 notify = require 'gulp-notify'
 
-module.exports = ->
+module.exports = (error) ->
 
   # Send error to notification center with gulp-notify
   notify.onError(
