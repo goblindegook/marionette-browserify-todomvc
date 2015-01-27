@@ -1,7 +1,7 @@
+Backbone = require 'backbone'
+Radio    = require './radio'
+
 module.exports = class Controller extends Backbone.Marionette.Controller
 
-  initialize: (options) ->
-    @app = options.app
-
   filterTodo: (filter = 'all') ->
-    @app.vent.trigger 'change:filter', filter.trim()
+    Radio.trigger 'change:filter', filter.trim()

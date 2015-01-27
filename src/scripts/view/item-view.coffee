@@ -1,3 +1,5 @@
+Backbone = require 'backbone'
+
 module.exports = class ItemView extends Backbone.Marionette.ItemView
 
   tagName: 'li'

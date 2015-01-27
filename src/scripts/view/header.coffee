@@ -1,3 +1,5 @@
+Backbone = require 'backbone'
+
 module.exports = class Header extends Backbone.Marionette.ItemView
 
   template: require '../template/header'

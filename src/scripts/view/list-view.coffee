@@ -1,3 +1,5 @@
+Backbone = require 'backbone'
+Radio    = require '../radio'
 ItemView = require './item-view'
 
 module.exports = class ListView extends Backbone.Marionette.CompositeView
@@ -19,9 +21,8 @@ module.exports = class ListView extends Backbone.Marionette.CompositeView
 
   filteredOn: 'all'
 
-  initialize: (options) ->
-    @app = options.app
-    @app.vent.on 'change:filter', (filter) => @updateSelection filter
+  initialize: ->
+    Radio.on 'change:filter', (filter) => @updateSelection filter
 
   addChild: (child) ->
     super if child.matchesFilter @filteredOn

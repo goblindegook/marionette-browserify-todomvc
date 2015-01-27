@@ -1,9 +1,7 @@
-global._              = require 'lodash', exposes: 'underscore'
-global.Backbone       = require 'backbone'
+Backbone              = require 'backbone'
 Backbone.$            = require 'jquery'
-Backbone.LocalStorage = require 'backbone.localstorage'
 Backbone.Marionette   = require 'backbone.marionette.dust'
+Backbone.LocalStorage = require 'backbone.localstorage'
+App                   = require './app'
 
-TodoMVC               = require './app'
-
-(new TodoMVC).start()
+App.start()

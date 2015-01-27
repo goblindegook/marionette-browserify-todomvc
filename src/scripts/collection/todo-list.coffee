@@ -1,4 +1,5 @@
-Todo = require '../model/todo'
+Backbone = require 'backbone'
+Todo     = require '../model/todo'
 
 module.exports = class TodoList extends Backbone.Collection
 

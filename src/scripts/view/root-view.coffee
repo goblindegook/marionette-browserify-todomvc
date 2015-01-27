@@ -1,6 +1,7 @@
-Header     = require './header'
-Footer     = require './footer'
-ListView   = require './list-view'
+Backbone = require 'backbone'
+Header   = require './header'
+Footer   = require './footer'
+ListView = require './list-view'
 
 module.exports = class RootView extends Backbone.Marionette.LayoutView
 
@@ -12,9 +13,9 @@ module.exports = class RootView extends Backbone.Marionette.LayoutView
     footer: '#footer'
 
   initialize: (options) ->
-    {@app, @collection} = options
+    {@collection} = options
 
   onRender: ->
     @header.show new Header { collection: @collection }
-    @footer.show new Footer { app: @app, collection: @collection }
-    @main.show new ListView { app: @app, collection: @collection }
+    @footer.show new Footer { collection: @collection }
+    @main.show new ListView { collection: @collection }
