@@ -1,5 +1,4 @@
 Backbone = require 'backbone'
-Radio    = require '../radio'
 
 module.exports = class Footer extends Backbone.Marionette.ItemView
 
@@ -20,7 +19,7 @@ module.exports = class Footer extends Backbone.Marionette.ItemView
     'all': 'render'
 
   initialize: ->
-    Radio.on 'change:filter', (filter) => @updateFilterSelection filter
+    Backbone.Radio.on 'global', 'change:filter', (filter) => @updateFilterSelection filter
 
   serializeData: ->
     active = @collection.getActive().length
