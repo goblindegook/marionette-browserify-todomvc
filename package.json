@@ -8,7 +8,7 @@
   },
   "browser": {
     "underscore": "lodash/dist/lodash.js",
-    "backbone.marionette.dust": "./src/scripts/shim/backbone.marionette.dust.js"
+    "backbone.marionette.dust": "./src/scripts/shim/backbone.marionette.dust.coffee"
   },
   "browserify": {
     "transform": [
